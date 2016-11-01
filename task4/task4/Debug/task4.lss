@@ -1,0 +1,1734 @@
+
+task4.elf:     file format elf32-avr32
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .reset        00002008  80000000  80000000  00000400  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rela.got     00000000  80002008  80002008  00002408  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .text         0000061c  80002008  80002008  00002408  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  3 .exception    00000200  80002800  80002800  00002c00  2**9
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  4 .rodata       0000016c  80002a00  80002a00  00002e00  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  5 .lalign       00000004  80002b6c  80002b6c  00002f6c  2**0
+                  ALLOC
+  6 .dalign       00000004  00000004  00000004  00000000  2**0
+                  ALLOC
+  7 .bss          000000f0  00000008  00000008  00000000  2**2
+                  ALLOC
+  8 .heap         0000ef08  000000f8  000000f8  00000000  2**0
+                  ALLOC
+  9 .comment      00000030  00000000  00000000  00002f6c  2**0
+                  CONTENTS, READONLY
+ 10 .debug_aranges 000003f8  00000000  00000000  00002fa0  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_pubnames 0000087e  00000000  00000000  00003398  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_info   00007fb4  00000000  00000000  00003c16  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_abbrev 0000101b  00000000  00000000  0000bbca  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_line   00004634  00000000  00000000  0000cbe5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_frame  00000854  00000000  00000000  0001121c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 16 .debug_str    00001c51  00000000  00000000  00011a70  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 17 .debug_loc    00001462  00000000  00000000  000136c1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 18 .debug_macinfo 007606ef  00000000  00000000  00014b23  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 19 .stack        00001000  0000f000  0000f000  00000000  2**0
+                  ALLOC
+ 20 .debug_ranges 00000388  00000000  00000000  00775218  2**3
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .reset:
+
+80000000 <_start>:
+
+  .global _start
+  .type _start, @function
+_start:
+  // Jump to the C runtime startup routine.
+  lda.w   pc, _stext
+80000000:	fe cf da d4 	sub	pc,pc,-9516
+
+80000004 <_trampoline>:
+80000004:	e0 8f 10 00 	bral	80002004 <program_start>
+	...
+
+80002004 <program_start>:
+  rjmp    program_start
+
+  .org  PROGRAM_START_OFFSET
+program_start:
+  // Jump to the C runtime startup routine.
+  lda.w   pc, _stext
+80002004:	fe cf fa d8 	sub	pc,pc,-1320
+
+Disassembly of section .text:
+
+80002008 <board_init>:
+80002008:	d4 01       	pushm	lr
+8000200a:	30 3b       	mov	r11,3
+#  define AT45DBX_MEM_CNT  1
+#endif
+
+void board_init(void)
+{
+	gpio_configure_pin(LED0_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+8000200c:	33 bc       	mov	r12,59
+8000200e:	f0 1f 00 2c 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(LED1_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+80002012:	30 3b       	mov	r11,3
+80002014:	33 cc       	mov	r12,60
+80002016:	f0 1f 00 2a 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(LED2_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+8000201a:	30 3b       	mov	r11,3
+8000201c:	33 dc       	mov	r12,61
+8000201e:	f0 1f 00 28 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(LED3_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+80002022:	30 3b       	mov	r11,3
+80002024:	33 ec       	mov	r12,62
+80002026:	f0 1f 00 26 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(LED4_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+8000202a:	30 3b       	mov	r11,3
+8000202c:	33 3c       	mov	r12,51
+8000202e:	f0 1f 00 24 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(LED5_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+80002032:	30 3b       	mov	r11,3
+80002034:	33 4c       	mov	r12,52
+80002036:	f0 1f 00 22 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(LED6_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+8000203a:	30 3b       	mov	r11,3
+8000203c:	33 5c       	mov	r12,53
+8000203e:	f0 1f 00 20 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(LED7_GPIO,GPIO_DIR_OUTPUT | GPIO_INIT_HIGH);
+80002042:	30 3b       	mov	r11,3
+80002044:	33 6c       	mov	r12,54
+80002046:	f0 1f 00 1e 	mcall	800020bc <board_init+0xb4>
+
+	gpio_configure_pin(GPIO_PUSH_BUTTON_0,GPIO_DIR_INPUT);
+8000204a:	30 0b       	mov	r11,0
+8000204c:	35 8c       	mov	r12,88
+8000204e:	f0 1f 00 1c 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(GPIO_PUSH_BUTTON_1,GPIO_DIR_INPUT);
+80002052:	30 0b       	mov	r11,0
+80002054:	35 5c       	mov	r12,85
+80002056:	f0 1f 00 1a 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(GPIO_PUSH_BUTTON_2,GPIO_DIR_INPUT);
+8000205a:	30 0b       	mov	r11,0
+8000205c:	35 2c       	mov	r12,82
+8000205e:	f0 1f 00 18 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(GPIO_JOYSTICK_PUSH,GPIO_DIR_INPUT);
+80002062:	30 0b       	mov	r11,0
+80002064:	31 4c       	mov	r12,20
+80002066:	f0 1f 00 16 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(GPIO_JOYSTICK_LEFT,GPIO_DIR_INPUT);
+8000206a:	30 0b       	mov	r11,0
+8000206c:	31 9c       	mov	r12,25
+8000206e:	f0 1f 00 14 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(GPIO_JOYSTICK_UP,GPIO_DIR_INPUT);
+80002072:	30 0b       	mov	r11,0
+80002074:	31 ac       	mov	r12,26
+80002076:	f0 1f 00 12 	mcall	800020bc <board_init+0xb4>
+	gpio_configure_pin(GPIO_JOYSTICK_DOWN,GPIO_DIR_INPUT);
+8000207a:	30 0b       	mov	r11,0
+8000207c:	31 bc       	mov	r12,27
+8000207e:	f0 1f 00 10 	mcall	800020bc <board_init+0xb4>
+		MREPEAT(AT45DBX_MEM_CNT, AT45DBX_ENABLE_NPCS_PIN, ~)
+#  undef AT45DBX_ENABLE_NPCS_PIN
+	};
+
+	// Assign I/Os to SPI.
+	gpio_enable_module(AT45DBX_SPI_GPIO_MAP,
+80002082:	30 4b       	mov	r11,4
+80002084:	48 fc       	lddpc	r12,800020c0 <board_init+0xb8>
+80002086:	f0 1f 00 10 	mcall	800020c4 <board_init+0xbc>
+		{SD_MMC_SPI_MOSI_PIN, SD_MMC_SPI_MOSI_FUNCTION},
+		{SD_MMC_SPI_NPCS_PIN, SD_MMC_SPI_NPCS_FUNCTION},
+	};
+
+	// Assign I/Os to SPI.
+	gpio_enable_module(SD_MMC_SPI_GPIO_MAP,
+8000208a:	30 4b       	mov	r11,4
+8000208c:	48 fc       	lddpc	r12,800020c8 <board_init+0xc0>
+8000208e:	f0 1f 00 0e 	mcall	800020c4 <board_init+0xbc>
+
+	// Configure SD/MMC card detect and write protect pins
+#  define SD_MMC_CONFIGURE_CD_WP_PIN(slot, unused) \
+	gpio_configure_pin(SD_MMC_##slot##_CD_GPIO,GPIO_DIR_INPUT); \
+	gpio_configure_pin(SD_MMC_##slot##_WP_GPIO,GPIO_DIR_INPUT);
+	MREPEAT(SD_MMC_SPI_MEM_CNT, SD_MMC_CONFIGURE_CD_WP_PIN, ~)
+80002092:	30 0b       	mov	r11,0
+80002094:	30 2c       	mov	r12,2
+80002096:	f0 1f 00 0a 	mcall	800020bc <board_init+0xb4>
+8000209a:	30 0b       	mov	r11,0
+8000209c:	30 7c       	mov	r12,7
+8000209e:	f0 1f 00 08 	mcall	800020bc <board_init+0xb4>
+		{AVR32_TWI_SDA_0_0_PIN, AVR32_TWI_SDA_0_0_FUNCTION},
+		{AVR32_TWI_SCL_0_0_PIN, AVR32_TWI_SCL_0_0_FUNCTION},
+	};
+
+	// TWI gpio pins configuration
+	gpio_enable_module(TWI_GPIO_MAP,
+800020a2:	30 2b       	mov	r11,2
+800020a4:	48 ac       	lddpc	r12,800020cc <board_init+0xc4>
+800020a6:	f0 1f 00 08 	mcall	800020c4 <board_init+0xbc>
+	// USART GPIO pin configuration.
+	static const gpio_map_t COMPORT_GPIO_MAP = {
+		{USART_RXD_PIN, USART_RXD_FUNCTION },
+		{USART_TXD_PIN, USART_TXD_FUNCTION },
+	};
+	gpio_enable_module(COMPORT_GPIO_MAP,
+800020aa:	30 2b       	mov	r11,2
+800020ac:	48 9c       	lddpc	r12,800020d0 <board_init+0xc8>
+800020ae:	f0 1f 00 06 	mcall	800020c4 <board_init+0xbc>
+	// USART GPIO pin configuration.
+	static const gpio_map_t COMPORT0_GPIO_MAP = {
+		{USART0_RXD_PIN, USART0_RXD_FUNCTION },
+		{USART0_TXD_PIN, USART0_TXD_FUNCTION },
+	};
+	gpio_enable_module(COMPORT0_GPIO_MAP,
+800020b2:	30 2b       	mov	r11,2
+800020b4:	48 8c       	lddpc	r12,800020d4 <board_init+0xcc>
+800020b6:	f0 1f 00 04 	mcall	800020c4 <board_init+0xbc>
+			sizeof(COMPORT0_GPIO_MAP) / sizeof(COMPORT0_GPIO_MAP[0]));
+#endif
+}
+800020ba:	d8 02       	popm	pc
+800020bc:	80 00       	ld.sh	r0,r0[0x0]
+800020be:	21 c4       	sub	r4,28
+800020c0:	80 00       	ld.sh	r0,r0[0x0]
+800020c2:	2a 50       	sub	r0,-91
+800020c4:	80 00       	ld.sh	r0,r0[0x0]
+800020c6:	21 7c       	sub	r12,23
+800020c8:	80 00       	ld.sh	r0,r0[0x0]
+800020ca:	2a 00       	sub	r0,-96
+800020cc:	80 00       	ld.sh	r0,r0[0x0]
+800020ce:	2a 40       	sub	r0,-92
+800020d0:	80 00       	ld.sh	r0,r0[0x0]
+800020d2:	2a 30       	sub	r0,-93
+800020d4:	80 00       	ld.sh	r0,r0[0x0]
+800020d6:	2a 20       	sub	r0,-94
+
+800020d8 <adc_configure>:
+	adc->mr |= 1 << AVR32_ADC_LOWRES_OFFSET;
+#endif
+
+	/* Set Sample/Hold time to max so that the ADC capacitor should be
+	 * loaded entirely */
+	adc->mr |= 0xF << AVR32_ADC_SHTIM_OFFSET;
+800020d8:	78 18       	ld.w	r8,r12[0x4]
+800020da:	ea 18 0f 00 	orh	r8,0xf00
+800020de:	99 18       	st.w	r12[0x4],r8
+
+	/* Set Startup to max so that the ADC capacitor should be loaded
+	 * entirely */
+	adc->mr |= 0x1F << AVR32_ADC_STARTUP_OFFSET;
+800020e0:	78 18       	ld.w	r8,r12[0x4]
+800020e2:	ea 18 00 1f 	orh	r8,0x1f
+800020e6:	99 18       	st.w	r12[0x4],r8
+}
+800020e8:	5e fc       	retal	r12
+
+800020ea <adc_start>:
+void adc_start(volatile avr32_adc_t *adc)
+{
+	Assert( adc != NULL );
+
+	/* start conversion */
+	adc->cr = AVR32_ADC_START_MASK;
+800020ea:	30 28       	mov	r8,2
+800020ec:	99 08       	st.w	r12[0x0],r8
+}
+800020ee:	5e fc       	retal	r12
+
+800020f0 <adc_check_eoc>:
+	Assert( adc != NULL );
+	Assert( channel <= AVR32_ADC_CHANNELS_MSB ); /* check if channel exist
+	                                              **/
+
+	/* get SR register : EOC bit for channel */
+	return ((adc->sr & (1 << channel)) ? true : false);
+800020f0:	78 78       	ld.w	r8,r12[0x1c]
+800020f2:	30 19       	mov	r9,1
+800020f4:	f2 0b 09 49 	lsl	r9,r9,r11
+800020f8:	f3 e8 00 08 	and	r8,r9,r8
+}
+800020fc:	5f 1c       	srne	r12
+800020fe:	5e fc       	retal	r12
+
+80002100 <adc_get_value>:
+ * \param *adc Base address of the ADC
+ * \param  channel   channel to handle (0 to 7)
+ * \return The value acquired (unsigned long)
+ */
+uint32_t adc_get_value(volatile avr32_adc_t *adc, uint16_t channel)
+{
+80002100:	eb cd 40 e0 	pushm	r5-r7,lr
+80002104:	18 97       	mov	r7,r12
+80002106:	16 95       	mov	r5,r11
+	Assert( adc != NULL );
+	Assert( channel <= AVR32_ADC_CHANNELS_MSB );
+
+	/* wait for end of conversion */
+	while (adc_check_eoc(adc, channel) != true) {
+80002108:	ed db c0 10 	bfextu	r6,r11,0x0,0x10
+8000210c:	0c 9b       	mov	r11,r6
+8000210e:	0e 9c       	mov	r12,r7
+80002110:	f0 1f 00 05 	mcall	80002124 <adc_get_value+0x24>
+80002114:	cf c0       	breq	8000210c <adc_get_value+0xc>
+	}
+
+	return *((uint32_t *)((&(adc->cdr0)) + channel));
+80002116:	2d 07       	sub	r7,-48
+80002118:	5c 75       	castu.h	r5
+}
+8000211a:	ee 05 03 2c 	ld.w	r12,r7[r5<<0x2]
+8000211e:	e3 cd 80 e0 	ldm	sp++,r5-r7,pc
+80002122:	00 00       	add	r0,r0
+80002124:	80 00       	ld.sh	r0,r0[0x0]
+80002126:	20 f0       	sub	r0,15
+
+80002128 <gpio_enable_module_pin>:
+ *
+ * \return \ref GPIO_SUCCESS or \ref GPIO_INVALID_ARGUMENT.
+ */
+uint32_t gpio_enable_module_pin(uint32_t pin, uint32_t function)
+{
+	volatile avr32_gpio_port_t *gpio_port = &AVR32_GPIO.port[pin >> 5];
+80002128:	f8 08 16 05 	lsr	r8,r12,0x5
+8000212c:	a9 68       	lsl	r8,0x8
+8000212e:	e0 28 f0 00 	sub	r8,61440
+
+	/* Enable the correct function. */
+	switch (function) {
+80002132:	58 1b       	cp.w	r11,1
+80002134:	c0 d0       	breq	8000214e <gpio_enable_module_pin+0x26>
+80002136:	c0 63       	brcs	80002142 <gpio_enable_module_pin+0x1a>
+80002138:	58 2b       	cp.w	r11,2
+8000213a:	c1 00       	breq	8000215a <gpio_enable_module_pin+0x32>
+8000213c:	58 3b       	cp.w	r11,3
+8000213e:	c1 40       	breq	80002166 <gpio_enable_module_pin+0x3e>
+80002140:	5e ff       	retal	1
+	case 0: /* A function. */
+		gpio_port->pmr0c = 1 << (pin & 0x1F);
+80002142:	30 19       	mov	r9,1
+80002144:	f2 0c 09 49 	lsl	r9,r9,r12
+80002148:	91 69       	st.w	r8[0x18],r9
+		gpio_port->pmr1c = 1 << (pin & 0x1F);
+8000214a:	91 a9       	st.w	r8[0x28],r9
+#if (AVR32_GPIO_H_VERSION >= 210)
+		gpio_port->pmr2c = 1 << (pin & 0x1F);
+#endif
+		break;
+8000214c:	c1 28       	rjmp	80002170 <gpio_enable_module_pin+0x48>
+
+	case 1: /* B function. */
+		gpio_port->pmr0s = 1 << (pin & 0x1F);
+8000214e:	30 19       	mov	r9,1
+80002150:	f2 0c 09 49 	lsl	r9,r9,r12
+80002154:	91 59       	st.w	r8[0x14],r9
+		gpio_port->pmr1c = 1 << (pin & 0x1F);
+80002156:	91 a9       	st.w	r8[0x28],r9
+#if (AVR32_GPIO_H_VERSION >= 210)
+		gpio_port->pmr2c = 1 << (pin & 0x1F);
+#endif
+		break;
+80002158:	c0 c8       	rjmp	80002170 <gpio_enable_module_pin+0x48>
+
+	case 2: /* C function. */
+		gpio_port->pmr0c = 1 << (pin & 0x1F);
+8000215a:	30 19       	mov	r9,1
+8000215c:	f2 0c 09 49 	lsl	r9,r9,r12
+80002160:	91 69       	st.w	r8[0x18],r9
+		gpio_port->pmr1s = 1 << (pin & 0x1F);
+80002162:	91 99       	st.w	r8[0x24],r9
+#if (AVR32_GPIO_H_VERSION >= 210)
+		gpio_port->pmr2c = 1 << (pin & 0x1F);
+#endif
+		break;
+80002164:	c0 68       	rjmp	80002170 <gpio_enable_module_pin+0x48>
+
+	case 3: /* D function. */
+		gpio_port->pmr0s = 1 << (pin & 0x1F);
+80002166:	30 19       	mov	r9,1
+80002168:	f2 0c 09 49 	lsl	r9,r9,r12
+8000216c:	91 59       	st.w	r8[0x14],r9
+		gpio_port->pmr1s = 1 << (pin & 0x1F);
+8000216e:	91 99       	st.w	r8[0x24],r9
+	default:
+		return GPIO_INVALID_ARGUMENT;
+	}
+
+	/* Disable GPIO control. */
+	gpio_port->gperc = 1 << (pin & 0x1F);
+80002170:	30 19       	mov	r9,1
+80002172:	f2 0c 09 4c 	lsl	r12,r9,r12
+80002176:	91 2c       	st.w	r8[0x8],r12
+80002178:	5e fd       	retal	0
+8000217a:	d7 03       	nop
+
+8000217c <gpio_enable_module>:
+ * \param size The number of pins in \a gpiomap.
+ *
+ * \return \ref GPIO_SUCCESS or \ref GPIO_INVALID_ARGUMENT.
+ */
+uint32_t gpio_enable_module(const gpio_map_t gpiomap, uint32_t size)
+{
+8000217c:	d4 21       	pushm	r4-r7,lr
+8000217e:	18 97       	mov	r7,r12
+80002180:	16 94       	mov	r4,r11
+	uint32_t status = GPIO_SUCCESS;
+	uint32_t i;
+
+	for (i = 0; i < size; i++) {
+80002182:	58 0b       	cp.w	r11,0
+80002184:	c0 31       	brne	8000218a <gpio_enable_module+0xe>
+80002186:	30 05       	mov	r5,0
+80002188:	c0 d8       	rjmp	800021a2 <gpio_enable_module+0x26>
+8000218a:	30 06       	mov	r6,0
+8000218c:	0c 95       	mov	r5,r6
+		status |= gpio_enable_module_pin(gpiomap->pin, gpiomap->function);
+8000218e:	6e 1b       	ld.w	r11,r7[0x4]
+80002190:	6e 0c       	ld.w	r12,r7[0x0]
+80002192:	f0 1f 00 06 	mcall	800021a8 <gpio_enable_module+0x2c>
+80002196:	18 45       	or	r5,r12
+		gpiomap++;
+80002198:	2f 87       	sub	r7,-8
+uint32_t gpio_enable_module(const gpio_map_t gpiomap, uint32_t size)
+{
+	uint32_t status = GPIO_SUCCESS;
+	uint32_t i;
+
+	for (i = 0; i < size; i++) {
+8000219a:	2f f6       	sub	r6,-1
+8000219c:	0c 34       	cp.w	r4,r6
+8000219e:	fe 9b ff f8 	brhi	8000218e <gpio_enable_module+0x12>
+		status |= gpio_enable_module_pin(gpiomap->pin, gpiomap->function);
+		gpiomap++;
+	}
+
+	return status;
+}
+800021a2:	0a 9c       	mov	r12,r5
+800021a4:	d8 22       	popm	r4-r7,pc
+800021a6:	00 00       	add	r0,r0
+800021a8:	80 00       	ld.sh	r0,r0[0x0]
+800021aa:	21 28       	sub	r8,18
+
+800021ac <gpio_enable_gpio_pin>:
+ *            AVR32_PWM_3_PIN for PWM channel 3 can also be used to release
+ *            module pins for GPIO.
+ */
+void gpio_enable_gpio_pin(uint32_t pin)
+{
+	volatile avr32_gpio_port_t *gpio_port = &AVR32_GPIO.port[pin >> 5];
+800021ac:	f8 08 16 05 	lsr	r8,r12,0x5
+800021b0:	a9 68       	lsl	r8,0x8
+800021b2:	e0 28 f0 00 	sub	r8,61440
+	
+	gpio_port->oderc = 1 << (pin & 0x1F);
+800021b6:	30 19       	mov	r9,1
+800021b8:	f2 0c 09 4c 	lsl	r12,r9,r12
+800021bc:	f1 4c 00 48 	st.w	r8[72],r12
+	gpio_port->gpers = 1 << (pin & 0x1F);
+800021c0:	91 1c       	st.w	r8[0x4],r12
+}
+800021c2:	5e fc       	retal	r12
+
+800021c4 <gpio_configure_pin>:
+ * \param pin The pin number.
+ * \param flags The configuration.
+ */
+void gpio_configure_pin(uint32_t pin, uint32_t flags)
+{
+	volatile avr32_gpio_port_t *gpio_port = &AVR32_GPIO.port[pin >> 5];
+800021c4:	f8 08 16 05 	lsr	r8,r12,0x5
+800021c8:	a9 68       	lsl	r8,0x8
+800021ca:	e0 28 f0 00 	sub	r8,61440
+	} else {
+		gpio_port->pderc = 1 << (pin & 0x1F);
+	}
+
+#endif
+	if (flags & GPIO_PULL_UP) {
+800021ce:	16 99       	mov	r9,r11
+800021d0:	e2 19 00 04 	andl	r9,0x4,COH
+800021d4:	c0 70       	breq	800021e2 <gpio_configure_pin+0x1e>
+		gpio_port->puers = 1 << (pin & 0x1F);
+800021d6:	30 19       	mov	r9,1
+800021d8:	f2 0c 09 49 	lsl	r9,r9,r12
+800021dc:	f1 49 00 74 	st.w	r8[116],r9
+800021e0:	c0 68       	rjmp	800021ec <gpio_configure_pin+0x28>
+	} else {
+		gpio_port->puerc = 1 << (pin & 0x1F);
+800021e2:	30 19       	mov	r9,1
+800021e4:	f2 0c 09 49 	lsl	r9,r9,r12
+800021e8:	f1 49 00 78 	st.w	r8[120],r9
+	}
+
+#endif
+
+	/* Select interrupt level for group */
+	if (flags & GPIO_INTERRUPT) {
+800021ec:	16 99       	mov	r9,r11
+800021ee:	e2 19 00 80 	andl	r9,0x80,COH
+800021f2:	c2 40       	breq	8000223a <gpio_configure_pin+0x76>
+		if (flags & GPIO_BOTHEDGES) {
+800021f4:	16 99       	mov	r9,r11
+800021f6:	e2 19 01 80 	andl	r9,0x180,COH
+800021fa:	c0 90       	breq	8000220c <gpio_configure_pin+0x48>
+			gpio_port->imr0c = 1 << (pin & 0x1F);
+800021fc:	30 19       	mov	r9,1
+800021fe:	f2 0c 09 49 	lsl	r9,r9,r12
+80002202:	f1 49 00 a8 	st.w	r8[168],r9
+			gpio_port->imr1c = 1 << (pin & 0x1F);
+80002206:	f1 49 00 b8 	st.w	r8[184],r9
+8000220a:	c1 88       	rjmp	8000223a <gpio_configure_pin+0x76>
+		} else if (flags & GPIO_RISING) {
+8000220c:	16 99       	mov	r9,r11
+8000220e:	e2 19 02 80 	andl	r9,0x280,COH
+80002212:	c0 90       	breq	80002224 <gpio_configure_pin+0x60>
+			gpio_port->imr0s = 1 << (pin & 0x1F);
+80002214:	30 19       	mov	r9,1
+80002216:	f2 0c 09 49 	lsl	r9,r9,r12
+8000221a:	f1 49 00 a4 	st.w	r8[164],r9
+			gpio_port->imr1c = 1 << (pin & 0x1F);
+8000221e:	f1 49 00 b8 	st.w	r8[184],r9
+80002222:	c0 c8       	rjmp	8000223a <gpio_configure_pin+0x76>
+		} else if (flags & GPIO_FALLING) {
+80002224:	16 99       	mov	r9,r11
+80002226:	e2 19 03 80 	andl	r9,0x380,COH
+8000222a:	c0 80       	breq	8000223a <gpio_configure_pin+0x76>
+			gpio_port->imr0c = 1 << (pin & 0x1F);
+8000222c:	30 19       	mov	r9,1
+8000222e:	f2 0c 09 49 	lsl	r9,r9,r12
+80002232:	f1 49 00 a8 	st.w	r8[168],r9
+			gpio_port->imr1s = 1 << (pin & 0x1F);
+80002236:	f1 49 00 b4 	st.w	r8[180],r9
+		}
+	}
+
+	/* Select direction and initial pin state */
+	if (flags & GPIO_DIR_OUTPUT) {
+8000223a:	f3 db c0 01 	bfextu	r9,r11,0x0,0x1
+8000223e:	c1 50       	breq	80002268 <gpio_configure_pin+0xa4>
+		if (flags & GPIO_INIT_HIGH) {
+80002240:	e2 1b 00 02 	andl	r11,0x2,COH
+80002244:	c0 70       	breq	80002252 <gpio_configure_pin+0x8e>
+			gpio_port->ovrs = 1 << (pin & 0x1F);
+80002246:	30 19       	mov	r9,1
+80002248:	f2 0c 09 49 	lsl	r9,r9,r12
+8000224c:	f1 49 00 54 	st.w	r8[84],r9
+80002250:	c0 68       	rjmp	8000225c <gpio_configure_pin+0x98>
+		} else {
+			gpio_port->ovrc = 1 << (pin & 0x1F);
+80002252:	30 19       	mov	r9,1
+80002254:	f2 0c 09 49 	lsl	r9,r9,r12
+80002258:	f1 49 00 58 	st.w	r8[88],r9
+		}
+
+		gpio_port->oders = 1 << (pin & 0x1F);
+8000225c:	30 19       	mov	r9,1
+8000225e:	f2 0c 09 49 	lsl	r9,r9,r12
+80002262:	f1 49 00 44 	st.w	r8[68],r9
+80002266:	c0 68       	rjmp	80002272 <gpio_configure_pin+0xae>
+	} else {
+		gpio_port->oderc = 1 << (pin & 0x1F);
+80002268:	30 19       	mov	r9,1
+8000226a:	f2 0c 09 49 	lsl	r9,r9,r12
+8000226e:	f1 49 00 48 	st.w	r8[72],r9
+	}
+
+	/* Enable GPIO */
+	gpio_port->gpers = 1 << (pin & 0x1F);
+80002272:	30 19       	mov	r9,1
+80002274:	f2 0c 09 4c 	lsl	r12,r9,r12
+80002278:	91 1c       	st.w	r8[0x4],r12
+}
+8000227a:	5e fc       	retal	r12
+
+8000227c <_get_interrupt_handler>:
+__int_handler _get_interrupt_handler(uint32_t int_level)
+{
+	/* ICR3 is mapped first, ICR0 last.
+	Code in exception.S puts int_level in R12 which is used by the compiler
+	to pass a single argument to a function. */
+	uint32_t int_grp = AVR32_INTC.icr[AVR32_INTC_INT3 - int_level];
+8000227c:	fe 78 08 00 	mov	r8,-63488
+80002280:	e0 69 00 83 	mov	r9,131
+80002284:	f2 0c 01 0c 	sub	r12,r9,r12
+80002288:	f0 0c 03 29 	ld.w	r9,r8[r12<<0x2]
+	uint32_t int_req = AVR32_INTC.irr[int_grp];
+8000228c:	f2 ca ff c0 	sub	r10,r9,-64
+80002290:	f0 0a 03 28 	ld.w	r8,r8[r10<<0x2]
+	exception.S will provide the interrupt handler with a clean interrupt
+	stack frame, with nothing more pushed onto the stack. The interrupt
+	handler must manage the `rete' instruction, which can be done using
+	pure assembly, inline assembly or the `__attribute__((__interrupt__))'
+	C function attribute.*/
+	return (int_req)
+80002294:	58 08       	cp.w	r8,0
+80002296:	c0 21       	brne	8000229a <_get_interrupt_handler+0x1e>
+80002298:	5e fd       	retal	0
+		? _int_handler_table[int_grp]._int_line_handler_table[32
+8000229a:	f0 08 12 00 	clz	r8,r8
+8000229e:	48 5a       	lddpc	r10,800022b0 <_get_interrupt_handler+0x34>
+800022a0:	f4 09 00 39 	add	r9,r10,r9<<0x3
+800022a4:	f0 08 11 1f 	rsub	r8,r8,31
+800022a8:	72 19       	ld.w	r9,r9[0x4]
+	exception.S will provide the interrupt handler with a clean interrupt
+	stack frame, with nothing more pushed onto the stack. The interrupt
+	handler must manage the `rete' instruction, which can be done using
+	pure assembly, inline assembly or the `__attribute__((__interrupt__))'
+	C function attribute.*/
+	return (int_req)
+800022aa:	f2 08 03 2c 	ld.w	r12,r9[r8<<0x2]
+		? _int_handler_table[int_grp]._int_line_handler_table[32
+			- clz(int_req) - 1]
+		: NULL;
+}
+800022ae:	5e fc       	retal	r12
+800022b0:	80 00       	ld.sh	r0,r0[0x0]
+800022b2:	2a 70       	sub	r0,-89
+
+800022b4 <usart_set_async_baudrate>:
+ *
+ * \retval USART_SUCCESS        Baud rate successfully initialized.
+ * \retval USART_INVALID_INPUT  Baud rate set point is out of range for the given input clock frequency.
+ */
+static int usart_set_async_baudrate(volatile avr32_usart_t *usart, unsigned int baudrate, unsigned long pba_hz)
+{
+800022b4:	d4 01       	pushm	lr
+  unsigned int over = (pba_hz >= 16 * baudrate) ? 16 : 8;
+800022b6:	f6 08 15 04 	lsl	r8,r11,0x4
+800022ba:	14 38       	cp.w	r8,r10
+800022bc:	f9 b8 08 10 	movls	r8,16
+800022c0:	f9 b8 0b 08 	movhi	r8,8
+  unsigned int cd_fp = ((1 << AVR32_USART_BRGR_FP_SIZE) * pba_hz + (over * baudrate) / 2) / (over * baudrate);
+800022c4:	f0 0b 02 4b 	mul	r11,r8,r11
+800022c8:	f6 09 16 01 	lsr	r9,r11,0x1
+800022cc:	f2 0a 00 3a 	add	r10,r9,r10<<0x3
+800022d0:	f4 0b 0d 0a 	divu	r10,r10,r11
+  unsigned int cd = cd_fp >> AVR32_USART_BRGR_FP_SIZE;
+800022d4:	f4 09 16 03 	lsr	r9,r10,0x3
+  unsigned int fp = cd_fp & ((1 << AVR32_USART_BRGR_FP_SIZE) - 1);
+
+  if (cd < 1 || cd > (1 << AVR32_USART_BRGR_CD_SIZE) - 1)
+800022d8:	f2 cb 00 01 	sub	r11,r9,1
+800022dc:	e0 4b ff fe 	cp.w	r11,65534
+800022e0:	e0 88 00 03 	brls	800022e6 <usart_set_async_baudrate+0x32>
+800022e4:	da 0a       	popm	pc,r12=1
+    return USART_INVALID_INPUT;
+
+  usart->mr = (usart->mr & ~(AVR32_USART_MR_USCLKS_MASK |
+                             AVR32_USART_MR_SYNC_MASK |
+                             AVR32_USART_MR_OVER_MASK)) |
+              AVR32_USART_MR_USCLKS_MCK << AVR32_USART_MR_USCLKS_OFFSET |
+800022e6:	78 1b       	ld.w	r11,r12[0x4]
+  unsigned int fp = cd_fp & ((1 << AVR32_USART_BRGR_FP_SIZE) - 1);
+
+  if (cd < 1 || cd > (1 << AVR32_USART_BRGR_CD_SIZE) - 1)
+    return USART_INVALID_INPUT;
+
+  usart->mr = (usart->mr & ~(AVR32_USART_MR_USCLKS_MASK |
+800022e8:	e8 6e 00 00 	mov	lr,524288
+800022ec:	59 08       	cp.w	r8,16
+800022ee:	fc 08 17 10 	movne	r8,lr
+800022f2:	f9 b8 00 00 	moveq	r8,0
+800022f6:	e4 1b ff f7 	andh	r11,0xfff7
+800022fa:	e0 1b fe cf 	andl	r11,0xfecf
+800022fe:	16 48       	or	r8,r11
+80002300:	99 18       	st.w	r12[0x4],r8
+                             AVR32_USART_MR_SYNC_MASK |
+                             AVR32_USART_MR_OVER_MASK)) |
+              AVR32_USART_MR_USCLKS_MCK << AVR32_USART_MR_USCLKS_OFFSET |
+              ((over == 16) ? AVR32_USART_MR_OVER_X16 : AVR32_USART_MR_OVER_X8) << AVR32_USART_MR_OVER_OFFSET;
+
+  usart->brgr = cd << AVR32_USART_BRGR_CD_OFFSET |
+80002302:	f5 da c0 03 	bfextu	r10,r10,0x0,0x3
+80002306:	f3 ea 11 09 	or	r9,r9,r10<<0x10
+8000230a:	99 89       	st.w	r12[0x20],r9
+8000230c:	d8 0a       	popm	pc,r12=0
+
+8000230e <usart_write_char>:
+ *
+ * \return \c 1 if the USART Transmit Holding Register is free, otherwise \c 0.
+ */
+__always_inline static int usart_tx_ready(volatile avr32_usart_t *usart)
+{
+  return (usart->csr & AVR32_USART_CSR_TXRDY_MASK) != 0;
+8000230e:	78 58       	ld.w	r8,r12[0x14]
+}
+
+
+int usart_write_char(volatile avr32_usart_t *usart, int c)
+{
+  if (usart_tx_ready(usart))
+80002310:	e2 18 00 02 	andl	r8,0x2,COH
+80002314:	c0 31       	brne	8000231a <usart_write_char+0xc>
+80002316:	30 2c       	mov	r12,2
+80002318:	5e fc       	retal	r12
+  {
+    usart->thr = (c << AVR32_USART_THR_TXCHR_OFFSET) & AVR32_USART_THR_TXCHR_MASK;
+8000231a:	f7 db c0 09 	bfextu	r11,r11,0x0,0x9
+8000231e:	99 7b       	st.w	r12[0x1c],r11
+80002320:	5e fd       	retal	0
+80002322:	d7 03       	nop
+
+80002324 <usart_putchar>:
+    return USART_TX_BUSY;
+}
+
+
+int usart_putchar(volatile avr32_usart_t *usart, int c)
+{
+80002324:	eb cd 40 e0 	pushm	r5-r7,lr
+80002328:	18 96       	mov	r6,r12
+8000232a:	16 95       	mov	r5,r11
+8000232c:	e0 67 27 0f 	mov	r7,9999
+80002330:	c0 68       	rjmp	8000233c <usart_putchar+0x18>
+  int timeout = USART_DEFAULT_TIMEOUT;
+
+  do
+  {
+    if (!timeout--) return USART_FAILURE;
+80002332:	58 07       	cp.w	r7,0
+80002334:	c0 31       	brne	8000233a <usart_putchar+0x16>
+80002336:	e3 cf c0 e0 	ldm	sp++,r5-r7,pc,r12=-1
+8000233a:	20 17       	sub	r7,1
+  } while (usart_write_char(usart, c) != USART_SUCCESS);
+8000233c:	0a 9b       	mov	r11,r5
+8000233e:	0c 9c       	mov	r12,r6
+80002340:	f0 1f 00 03 	mcall	8000234c <usart_putchar+0x28>
+80002344:	cf 71       	brne	80002332 <usart_putchar+0xe>
+
+  return USART_SUCCESS;
+}
+80002346:	e3 cd 80 e0 	ldm	sp++,r5-r7,pc
+8000234a:	00 00       	add	r0,r0
+8000234c:	80 00       	ld.sh	r0,r0[0x0]
+8000234e:	23 0e       	sub	lr,48
+
+80002350 <usart_write_line>:
+  return c;
+}
+
+
+void usart_write_line(volatile avr32_usart_t *usart, const char *string)
+{
+80002350:	eb cd 40 c0 	pushm	r6-r7,lr
+80002354:	18 96       	mov	r6,r12
+80002356:	16 97       	mov	r7,r11
+  while (*string != '\0')
+80002358:	17 8b       	ld.ub	r11,r11[0x0]
+8000235a:	58 0b       	cp.w	r11,0
+8000235c:	c0 80       	breq	8000236c <usart_write_line+0x1c>
+    usart_putchar(usart, *string++);
+8000235e:	2f f7       	sub	r7,-1
+80002360:	0c 9c       	mov	r12,r6
+80002362:	f0 1f 00 04 	mcall	80002370 <usart_write_line+0x20>
+}
+
+
+void usart_write_line(volatile avr32_usart_t *usart, const char *string)
+{
+  while (*string != '\0')
+80002366:	0f 8b       	ld.ub	r11,r7[0x0]
+80002368:	58 0b       	cp.w	r11,0
+8000236a:	cf a1       	brne	8000235e <usart_write_line+0xe>
+8000236c:	e3 cd 80 c0 	ldm	sp++,r6-r7,pc
+80002370:	80 00       	ld.sh	r0,r0[0x0]
+80002372:	23 24       	sub	r4,50
+
+80002374 <usart_reset>:
+//! @{
+
+
+void usart_reset(volatile avr32_usart_t *usart)
+{
+  bool global_interrupt_enabled = cpu_irq_is_enabled();
+80002374:	e1 b8 00 00 	mfsr	r8,0x0
+
+  // Disable all USART interrupts.
+  // Interrupts needed should be set explicitly on every reset.
+  if (global_interrupt_enabled) cpu_irq_disable();
+80002378:	e6 18 00 01 	andh	r8,0x1,COH
+8000237c:	c0 71       	brne	8000238a <usart_reset+0x16>
+8000237e:	d3 03       	ssrf	0x10
+  usart->idr = 0xFFFFFFFF;
+80002380:	3f f8       	mov	r8,-1
+80002382:	99 38       	st.w	r12[0xc],r8
+  usart->csr;
+80002384:	78 58       	ld.w	r8,r12[0x14]
+  if (global_interrupt_enabled) cpu_irq_enable();
+80002386:	d5 03       	csrf	0x10
+80002388:	c0 48       	rjmp	80002390 <usart_reset+0x1c>
+  bool global_interrupt_enabled = cpu_irq_is_enabled();
+
+  // Disable all USART interrupts.
+  // Interrupts needed should be set explicitly on every reset.
+  if (global_interrupt_enabled) cpu_irq_disable();
+  usart->idr = 0xFFFFFFFF;
+8000238a:	3f f8       	mov	r8,-1
+8000238c:	99 38       	st.w	r12[0xc],r8
+  usart->csr;
+8000238e:	78 58       	ld.w	r8,r12[0x14]
+  if (global_interrupt_enabled) cpu_irq_enable();
+
+  // Reset mode and other registers that could cause unpredictable behavior after reset.
+  usart->mr = 0;
+80002390:	30 08       	mov	r8,0
+80002392:	99 18       	st.w	r12[0x4],r8
+  usart->rtor = 0;
+80002394:	99 98       	st.w	r12[0x24],r8
+  usart->ttgr = 0;
+80002396:	99 a8       	st.w	r12[0x28],r8
+
+  // Shutdown TX and RX (will be re-enabled when setup has successfully completed),
+  // reset status bits and turn off DTR and RTS.
+  usart->cr = AVR32_USART_CR_RSTRX_MASK   |
+80002398:	ea 68 61 0c 	mov	r8,680204
+8000239c:	99 08       	st.w	r12[0x0],r8
+#ifndef AVR32_USART_440_H_INCLUDED
+// Note: Modem Signal Management DTR-DSR-DCD-RI are not included in USART rev.440.
+              AVR32_USART_CR_DTRDIS_MASK  |
+#endif
+              AVR32_USART_CR_RTSDIS_MASK;
+}
+8000239e:	5e fc       	retal	r12
+
+800023a0 <usart_init_rs232>:
+
+
+int usart_init_rs232(volatile avr32_usart_t *usart, const usart_options_t *opt, long pba_hz)
+{
+800023a0:	eb cd 40 e0 	pushm	r5-r7,lr
+800023a4:	18 96       	mov	r6,r12
+800023a6:	16 97       	mov	r7,r11
+800023a8:	14 95       	mov	r5,r10
+  // Reset the USART and shutdown TX and RX.
+  usart_reset(usart);
+800023aa:	f0 1f 00 2f 	mcall	80002464 <usart_init_rs232+0xc4>
+
+  // Check input values.
+  if (!opt || // Null pointer.
+800023ae:	58 07       	cp.w	r7,0
+800023b0:	c5 80       	breq	80002460 <usart_init_rs232+0xc0>
+      opt->charlength < 5 || opt->charlength > 9 ||
+800023b2:	0f c8       	ld.ub	r8,r7[0x4]
+{
+  // Reset the USART and shutdown TX and RX.
+  usart_reset(usart);
+
+  // Check input values.
+  if (!opt || // Null pointer.
+800023b4:	30 49       	mov	r9,4
+800023b6:	f2 08 18 00 	cp.b	r8,r9
+800023ba:	e0 88 00 53 	brls	80002460 <usart_init_rs232+0xc0>
+800023be:	30 99       	mov	r9,9
+800023c0:	f2 08 18 00 	cp.b	r8,r9
+800023c4:	e0 8b 00 4e 	brhi	80002460 <usart_init_rs232+0xc0>
+      opt->charlength < 5 || opt->charlength > 9 ||
+      opt->paritytype > 7 ||
+800023c8:	0f d9       	ld.ub	r9,r7[0x5]
+800023ca:	30 78       	mov	r8,7
+800023cc:	f0 09 18 00 	cp.b	r9,r8
+800023d0:	e0 8b 00 48 	brhi	80002460 <usart_init_rs232+0xc0>
+      opt->stopbits > 2 + 255 ||
+800023d4:	8e 39       	ld.sh	r9,r7[0x6]
+800023d6:	e0 68 01 01 	mov	r8,257
+800023da:	f0 09 19 00 	cp.h	r9,r8
+800023de:	e0 8b 00 41 	brhi	80002460 <usart_init_rs232+0xc0>
+      opt->channelmode > 3 ||
+800023e2:	ef 39 00 08 	ld.ub	r9,r7[8]
+800023e6:	30 38       	mov	r8,3
+800023e8:	f0 09 18 00 	cp.b	r9,r8
+800023ec:	e0 8b 00 3a 	brhi	80002460 <usart_init_rs232+0xc0>
+      usart_set_async_baudrate(usart, opt->baudrate, pba_hz) == USART_INVALID_INPUT)
+800023f0:	0a 9a       	mov	r10,r5
+800023f2:	6e 0b       	ld.w	r11,r7[0x0]
+800023f4:	0c 9c       	mov	r12,r6
+800023f6:	f0 1f 00 1d 	mcall	80002468 <usart_init_rs232+0xc8>
+{
+  // Reset the USART and shutdown TX and RX.
+  usart_reset(usart);
+
+  // Check input values.
+  if (!opt || // Null pointer.
+800023fa:	58 1c       	cp.w	r12,1
+800023fc:	c3 20       	breq	80002460 <usart_init_rs232+0xc0>
+      opt->stopbits > 2 + 255 ||
+      opt->channelmode > 3 ||
+      usart_set_async_baudrate(usart, opt->baudrate, pba_hz) == USART_INVALID_INPUT)
+    return USART_INVALID_INPUT;
+
+  if (opt->charlength == 9)
+800023fe:	0f c8       	ld.ub	r8,r7[0x4]
+80002400:	30 99       	mov	r9,9
+80002402:	f2 08 18 00 	cp.b	r8,r9
+80002406:	c0 51       	brne	80002410 <usart_init_rs232+0x70>
+  {
+    // Character length set to 9 bits. MODE9 dominates CHRL.
+    usart->mr |= AVR32_USART_MR_MODE9_MASK;
+80002408:	6c 18       	ld.w	r8,r6[0x4]
+8000240a:	b1 b8       	sbr	r8,0x11
+8000240c:	8d 18       	st.w	r6[0x4],r8
+8000240e:	c0 68       	rjmp	8000241a <usart_init_rs232+0x7a>
+  }
+  else
+  {
+    // CHRL gives the character length (- 5) when MODE9 = 0.
+    usart->mr |= (opt->charlength - 5) << AVR32_USART_MR_CHRL_OFFSET;
+80002410:	6c 19       	ld.w	r9,r6[0x4]
+80002412:	20 58       	sub	r8,5
+80002414:	f3 e8 10 68 	or	r8,r9,r8<<0x6
+80002418:	8d 18       	st.w	r6[0x4],r8
+  }
+
+  usart->mr |= opt->paritytype << AVR32_USART_MR_PAR_OFFSET |
+8000241a:	6c 19       	ld.w	r9,r6[0x4]
+8000241c:	ef 3a 00 08 	ld.ub	r10,r7[8]
+80002420:	0f d8       	ld.ub	r8,r7[0x5]
+80002422:	a9 78       	lsl	r8,0x9
+80002424:	f1 ea 10 e8 	or	r8,r8,r10<<0xe
+80002428:	12 48       	or	r8,r9
+8000242a:	8d 18       	st.w	r6[0x4],r8
+               opt->channelmode << AVR32_USART_MR_CHMODE_OFFSET;
+
+  if (opt->stopbits > USART_2_STOPBITS)
+8000242c:	8e 38       	ld.sh	r8,r7[0x6]
+8000242e:	30 29       	mov	r9,2
+80002430:	f2 08 19 00 	cp.h	r8,r9
+80002434:	e0 88 00 09 	brls	80002446 <usart_init_rs232+0xa6>
+  {
+    // Set two stop bits
+    usart->mr |= AVR32_USART_MR_NBSTOP_2 << AVR32_USART_MR_NBSTOP_OFFSET;
+80002438:	6c 18       	ld.w	r8,r6[0x4]
+8000243a:	ad b8       	sbr	r8,0xd
+8000243c:	8d 18       	st.w	r6[0x4],r8
+    // and a timeguard period gives the rest.
+    usart->ttgr = opt->stopbits - USART_2_STOPBITS;
+8000243e:	8e b8       	ld.uh	r8,r7[0x6]
+80002440:	20 28       	sub	r8,2
+80002442:	8d a8       	st.w	r6[0x28],r8
+80002444:	c0 68       	rjmp	80002450 <usart_init_rs232+0xb0>
+  }
+  else
+    // Insert 1, 1.5 or 2 stop bits.
+    usart->mr |= opt->stopbits << AVR32_USART_MR_NBSTOP_OFFSET;
+80002446:	6c 19       	ld.w	r9,r6[0x4]
+80002448:	5c 78       	castu.h	r8
+8000244a:	f3 e8 10 c8 	or	r8,r9,r8<<0xc
+8000244e:	8d 18       	st.w	r6[0x4],r8
+
+  // Set normal mode.
+  usart->mr = (usart->mr & ~AVR32_USART_MR_MODE_MASK) |
+80002450:	6c 18       	ld.w	r8,r6[0x4]
+80002452:	e0 18 ff f0 	andl	r8,0xfff0
+80002456:	8d 18       	st.w	r6[0x4],r8
+              AVR32_USART_MR_MODE_NORMAL << AVR32_USART_MR_MODE_OFFSET;
+
+  // Setup complete; enable communication.
+  // Enable input and output.
+  usart->cr = AVR32_USART_CR_RXEN_MASK |
+80002458:	35 08       	mov	r8,80
+8000245a:	8d 08       	st.w	r6[0x0],r8
+8000245c:	e3 cf 80 e0 	ldm	sp++,r5-r7,pc,r12=0
+              AVR32_USART_CR_TXEN_MASK;
+
+  return USART_SUCCESS;
+80002460:	e3 cf 90 e0 	ldm	sp++,r5-r7,pc,r12=1
+80002464:	80 00       	ld.sh	r0,r0[0x0]
+80002466:	23 74       	sub	r4,55
+80002468:	80 00       	ld.sh	r0,r0[0x0]
+8000246a:	22 b4       	sub	r4,43
+
+8000246c <print>:
+  print_hex(DBG_USART, n);
+}
+
+
+void print(volatile avr32_usart_t *usart, const char *str)
+{
+8000246c:	d4 01       	pushm	lr
+  // Invoke the USART driver to transmit the input string with the given USART.
+  usart_write_line(usart, str);
+8000246e:	f0 1f 00 02 	mcall	80002474 <print+0x8>
+}
+80002472:	d8 02       	popm	pc
+80002474:	80 00       	ld.sh	r0,r0[0x0]
+80002476:	23 50       	sub	r0,53
+
+80002478 <print_hex>:
+  print(usart, tmp);
+}
+
+
+void print_hex(volatile avr32_usart_t *usart, unsigned long n)
+{
+80002478:	d4 01       	pushm	lr
+8000247a:	20 3d       	sub	sp,12
+  char tmp[9];
+  int i;
+
+  // Convert the given number to an ASCII hexadecimal representation.
+  tmp[8] = '\0';
+8000247c:	30 08       	mov	r8,0
+8000247e:	fb 68 00 08 	st.b	sp[8],r8
+80002482:	fa c8 ff f9 	sub	r8,sp,-7
+  // Transmit the resulting string with the given USART.
+  print(usart, tmp);
+}
+
+
+void print_hex(volatile avr32_usart_t *usart, unsigned long n)
+80002486:	fa ce 00 01 	sub	lr,sp,1
+
+  // Convert the given number to an ASCII hexadecimal representation.
+  tmp[8] = '\0';
+  for (i = 7; i >= 0; i--)
+  {
+    tmp[i] = HEX_DIGITS[n & 0xF];
+8000248a:	48 8a       	lddpc	r10,800024a8 <print_hex+0x30>
+8000248c:	f3 db c0 04 	bfextu	r9,r11,0x0,0x4
+80002490:	f4 09 07 09 	ld.ub	r9,r10[r9]
+80002494:	b0 89       	st.b	r8[0x0],r9
+    n >>= 4;
+80002496:	a5 8b       	lsr	r11,0x4
+80002498:	20 18       	sub	r8,1
+  char tmp[9];
+  int i;
+
+  // Convert the given number to an ASCII hexadecimal representation.
+  tmp[8] = '\0';
+  for (i = 7; i >= 0; i--)
+8000249a:	1c 38       	cp.w	r8,lr
+8000249c:	cf 81       	brne	8000248c <print_hex+0x14>
+    tmp[i] = HEX_DIGITS[n & 0xF];
+    n >>= 4;
+  }
+
+  // Transmit the resulting string with the given USART.
+  print(usart, tmp);
+8000249e:	1a 9b       	mov	r11,sp
+800024a0:	f0 1f 00 03 	mcall	800024ac <print_hex+0x34>
+}
+800024a4:	2f dd       	sub	sp,-12
+800024a6:	d8 02       	popm	pc
+800024a8:	80 00       	ld.sh	r0,r0[0x0]
+800024aa:	2b 10       	sub	r0,-79
+800024ac:	80 00       	ld.sh	r0,r0[0x0]
+800024ae:	24 6c       	sub	r12,70
+
+800024b0 <print_dbg_hex>:
+  print_short_hex(DBG_USART, n);
+}
+
+
+void print_dbg_hex(unsigned long n)
+{
+800024b0:	d4 01       	pushm	lr
+  // Redirection to the debug USART.
+  print_hex(DBG_USART, n);
+800024b2:	18 9b       	mov	r11,r12
+800024b4:	fe 7c 18 00 	mov	r12,-59392
+800024b8:	f0 1f 00 02 	mcall	800024c0 <print_dbg_hex+0x10>
+}
+800024bc:	d8 02       	popm	pc
+800024be:	00 00       	add	r0,r0
+800024c0:	80 00       	ld.sh	r0,r0[0x0]
+800024c2:	24 78       	sub	r8,71
+
+800024c4 <print_dbg>:
+  usart_init_rs232(DBG_USART, &dbg_usart_options, pba_hz);
+}
+
+
+void print_dbg(const char *str)
+{
+800024c4:	d4 01       	pushm	lr
+  // Redirection to the debug USART.
+  print(DBG_USART, str);
+800024c6:	18 9b       	mov	r11,r12
+800024c8:	fe 7c 18 00 	mov	r12,-59392
+800024cc:	f0 1f 00 02 	mcall	800024d4 <print_dbg+0x10>
+}
+800024d0:	d8 02       	popm	pc
+800024d2:	00 00       	add	r0,r0
+800024d4:	80 00       	ld.sh	r0,r0[0x0]
+800024d6:	24 6c       	sub	r12,70
+
+800024d8 <init_dbg_rs232_ex>:
+  init_dbg_rs232_ex(DBG_USART_BAUDRATE, pba_hz);
+}
+
+
+void init_dbg_rs232_ex(unsigned long baudrate, long pba_hz)
+{
+800024d8:	eb cd 40 80 	pushm	r7,lr
+800024dc:	20 3d       	sub	sp,12
+800024de:	16 97       	mov	r7,r11
+    .baudrate = baudrate,
+    .charlength = 8,
+    .paritytype = USART_NO_PARITY,
+    .stopbits = USART_1_STOPBIT,
+    .channelmode = USART_NORMAL_CHMODE
+  };
+800024e0:	50 0c       	stdsp	sp[0x0],r12
+800024e2:	30 88       	mov	r8,8
+800024e4:	ba c8       	st.b	sp[0x4],r8
+800024e6:	30 48       	mov	r8,4
+800024e8:	ba d8       	st.b	sp[0x5],r8
+800024ea:	30 08       	mov	r8,0
+800024ec:	ba 38       	st.h	sp[0x6],r8
+800024ee:	fb 68 00 08 	st.b	sp[8],r8
+
+  // Setup GPIO for debug USART.
+  gpio_enable_module(DBG_USART_GPIO_MAP,
+800024f2:	30 2b       	mov	r11,2
+800024f4:	48 6c       	lddpc	r12,8000250c <init_dbg_rs232_ex+0x34>
+800024f6:	f0 1f 00 07 	mcall	80002510 <init_dbg_rs232_ex+0x38>
+                     sizeof(DBG_USART_GPIO_MAP) / sizeof(DBG_USART_GPIO_MAP[0]));
+
+  // Initialize it in RS232 mode.
+  usart_init_rs232(DBG_USART, &dbg_usart_options, pba_hz);
+800024fa:	0e 9a       	mov	r10,r7
+800024fc:	1a 9b       	mov	r11,sp
+800024fe:	fe 7c 18 00 	mov	r12,-59392
+80002502:	f0 1f 00 05 	mcall	80002514 <init_dbg_rs232_ex+0x3c>
+}
+80002506:	2f dd       	sub	sp,-12
+80002508:	e3 cd 80 80 	ldm	sp++,r7,pc
+8000250c:	80 00       	ld.sh	r0,r0[0x0]
+8000250e:	2b 20       	sub	r0,-78
+80002510:	80 00       	ld.sh	r0,r0[0x0]
+80002512:	21 7c       	sub	r12,23
+80002514:	80 00       	ld.sh	r0,r0[0x0]
+80002516:	23 a0       	sub	r0,58
+
+80002518 <init_dbg_rs232>:
+//! ASCII representation of hexadecimal digits.
+static const char HEX_DIGITS[16] = "0123456789ABCDEF";
+
+
+void init_dbg_rs232(long pba_hz)
+{
+80002518:	d4 01       	pushm	lr
+  init_dbg_rs232_ex(DBG_USART_BAUDRATE, pba_hz);
+8000251a:	18 9b       	mov	r11,r12
+8000251c:	e0 6c e1 00 	mov	r12,57600
+80002520:	f0 1f 00 02 	mcall	80002528 <init_dbg_rs232+0x10>
+}
+80002524:	d8 02       	popm	pc
+80002526:	00 00       	add	r0,r0
+80002528:	80 00       	ld.sh	r0,r0[0x0]
+8000252a:	24 d8       	sub	r8,77
+
+8000252c <_stext>:
+
+  .global _stext
+  .type _stext, @function
+_stext:
+  // Set initial stack pointer.
+  lda.w   sp, _estack
+8000252c:	e0 7d 00 00 	mov	sp,65536
+
+  // Set up EVBA so interrupts can be enabled.
+  lda.w   r0, _evba
+  mtsr    AVR32_EVBA, r0
+80002530:	fe c0 fd 30 	sub	r0,pc,-720
+
+  // Enable the exception processing.
+  csrf    AVR32_SR_EM_OFFSET
+80002534:	e3 b0 00 01 	mtsr	0x4,r0
+
+  // Load initialized data having a global lifetime from the data LMA.
+  lda.w   r0, _data
+  lda.w   r1, _edata
+80002538:	d5 53       	csrf	0x15
+  cp      r0, r1
+8000253a:	30 80       	mov	r0,8
+  brhs    idata_load_loop_end
+8000253c:	30 81       	mov	r1,8
+  lda.w   r2, _data_lma
+8000253e:	02 30       	cp.w	r0,r1
+idata_load_loop:
+  ld.d    r4, r2++
+80002540:	c0 72       	brcc	8000254e <idata_load_loop_end>
+  st.d    r0++, r4
+80002542:	fe c2 f9 d2 	sub	r2,pc,-1582
+
+80002546 <idata_load_loop>:
+  cp      r0, r1
+  brlo    idata_load_loop
+80002546:	a5 05       	ld.d	r4,r2++
+idata_load_loop_end:
+
+  // Clear uninitialized data having a global lifetime in the blank static storage section.
+  lda.w   r0, __bss_start
+80002548:	a1 24       	st.d	r0++,r4
+  lda.w   r1, _end
+8000254a:	02 30       	cp.w	r0,r1
+  cp      r0, r1
+8000254c:	cf d3       	brcs	80002546 <idata_load_loop>
+
+8000254e <idata_load_loop_end>:
+  brhs    udata_clear_loop_end
+8000254e:	30 80       	mov	r0,8
+  mov     r2, 0
+80002550:	e0 61 00 f8 	mov	r1,248
+  mov     r3, 0
+udata_clear_loop:
+  st.d    r0++, r2
+80002554:	02 30       	cp.w	r0,r1
+  cp      r0, r1
+80002556:	c0 62       	brcc	80002562 <udata_clear_loop_end>
+  brlo    udata_clear_loop
+80002558:	30 02       	mov	r2,0
+  // Safety: Set the default "return" @ to the exit routine address.
+  lda.w   lr, exit
+#endif
+
+  // Start the show.
+  lda.w   pc, main
+8000255a:	30 03       	mov	r3,0
+
+8000255c <udata_clear_loop>:
+8000255c:	a1 22       	st.d	r0++,r2
+8000255e:	02 30       	cp.w	r0,r1
+80002560:	cf e3       	brcs	8000255c <udata_clear_loop>
+
+80002562 <udata_clear_loop_end>:
+80002562:	fe cf ff f6 	sub	pc,pc,-10
+80002566:	d7 03       	nop
+
+80002568 <sysclk_init>:
+
+#if (defined CONFIG_SYSCLK_DEFAULT_RETURNS_SLOW_OSC)
+	/* Signal that the internal frequencies are setup */
+	sysclk_initialized = true;
+#endif
+}
+80002568:	5e fc       	retal	r12
+8000256a:	d7 03       	nop
+
+8000256c <main>:
+
+#define DBG_USART_BAUDRATE   57600
+
+/* The resolution of the A/D converter is 10bit so 1024 steps. (p.699) Can also be configured with 8bits.*/
+int main (void)
+{
+8000256c:	eb cd 40 f8 	pushm	r3-r7,lr
+	// Insert system clock initialization code here (sysclk_init()).
+		/* Init system clocks */
+		sysclk_init();
+80002570:	f0 1f 00 21 	mcall	800025f4 <main+0x88>
+		/* init debug serial line */
+		init_dbg_rs232(DBG_USART_BAUDRATE);
+80002574:	e0 6c e1 00 	mov	r12,57600
+80002578:	f0 1f 00 20 	mcall	800025f8 <main+0x8c>
+		board_init();
+8000257c:	f0 1f 00 20 	mcall	800025fc <main+0x90>
+
+			
+		gpio_enable_gpio_pin(AVR32_ADC_AD_2_PIN);//Enable light detector
+80002580:	31 7c       	mov	r12,23
+80002582:	f0 1f 00 20 	mcall	80002600 <main+0x94>
+		adc_configure(&AVR32_ADC);		
+80002586:	fe 7c 3c 00 	mov	r12,-50176
+8000258a:	f0 1f 00 1f 	mcall	80002604 <main+0x98>
+		adc_start(&AVR32_ADC);
+8000258e:	fe 7c 3c 00 	mov	r12,-50176
+80002592:	f0 1f 00 1e 	mcall	80002608 <main+0x9c>
+		
+		signed short adc_value_light  = -1;
+		/* Display a header to user */
+		print_dbg("\x1B[2J\x1B[H\r\nADC Example\r\n");
+80002596:	49 ec       	lddpc	r12,8000260c <main+0xa0>
+80002598:	f0 1f 00 1e 	mcall	80002610 <main+0xa4>
+	// Insert application code here, after the board has been initialized.
+		while(true)
+		{
+			adc_value_light = adc_get_value(&AVR32_ADC, 2);
+8000259c:	30 26       	mov	r6,2
+8000259e:	fe 75 3c 00 	mov	r5,-50176
+		
+			/* Display value to user */
+			print_dbg("HEX Value for Channel light : 0x");
+800025a2:	49 d4       	lddpc	r4,80002614 <main+0xa8>
+			print_dbg_hex(adc_value_light);
+			print_dbg("\r\n");
+800025a4:	49 d3       	lddpc	r3,80002618 <main+0xac>
+		/* Display a header to user */
+		print_dbg("\x1B[2J\x1B[H\r\nADC Example\r\n");
+	// Insert application code here, after the board has been initialized.
+		while(true)
+		{
+			adc_value_light = adc_get_value(&AVR32_ADC, 2);
+800025a6:	0c 9b       	mov	r11,r6
+800025a8:	0a 9c       	mov	r12,r5
+800025aa:	f0 1f 00 1d 	mcall	8000261c <main+0xb0>
+800025ae:	18 97       	mov	r7,r12
+		
+			/* Display value to user */
+			print_dbg("HEX Value for Channel light : 0x");
+800025b0:	08 9c       	mov	r12,r4
+800025b2:	f0 1f 00 18 	mcall	80002610 <main+0xa4>
+			print_dbg_hex(adc_value_light);
+800025b6:	0e 9c       	mov	r12,r7
+800025b8:	5c 8c       	casts.h	r12
+800025ba:	f0 1f 00 1a 	mcall	80002620 <main+0xb4>
+			print_dbg("\r\n");
+800025be:	06 9c       	mov	r12,r3
+800025c0:	f0 1f 00 14 	mcall	80002610 <main+0xa4>
+ * \param  delay:   (input) delay in CPU cycles before timeout.
+ * \param  cpu_time: (output) internal information used by the timer API.
+ */
+__always_inline static void cpu_set_timeout(unsigned long delay, t_cpu_time *cpu_time)
+{
+  cpu_time->delay_start_cycle = Get_system_register(AVR32_COUNT);
+800025c4:	e1 b8 00 42 	mfsr	r8,0x108
+  cpu_time->delay_end_cycle   = cpu_time->delay_start_cycle + delay;
+800025c8:	e0 69 e1 00 	mov	r9,57600
+800025cc:	f0 09 00 0a 	add	r10,r8,r9
+ *
+ * \return true if timeout occurred, otherwise false.
+ */
+__always_inline static unsigned long cpu_is_timeout(t_cpu_time *cpu_time)
+{
+  unsigned long current_cycle_count = Get_system_register(AVR32_COUNT);
+800025d0:	e1 b9 00 42 	mfsr	r9,0x108
+  // Test if the timeout as already occurred.
+  else if (cpu_time->timer_state == CPU_TIMER_STATE_REACHED)
+    return true;
+
+  // If the ending cycle count of this timeout is wrapped, ...
+  else if (cpu_time->delay_start_cycle > cpu_time->delay_end_cycle)
+800025d4:	14 38       	cp.w	r8,r10
+800025d6:	e0 88 00 08 	brls	800025e6 <main+0x7a>
+  {
+    if (current_cycle_count < cpu_time->delay_start_cycle && current_cycle_count > cpu_time->delay_end_cycle)
+800025da:	12 38       	cp.w	r8,r9
+800025dc:	fe 98 ff fa 	brls	800025d0 <main+0x64>
+800025e0:	12 3a       	cp.w	r10,r9
+800025e2:	ce 23       	brcs	800025a6 <main+0x3a>
+800025e4:	cf 6b       	rjmp	800025d0 <main+0x64>
+    }
+    return false;
+  }
+  else
+  {
+    if (current_cycle_count < cpu_time->delay_start_cycle || current_cycle_count > cpu_time->delay_end_cycle)
+800025e6:	12 38       	cp.w	r8,r9
+800025e8:	fe 9b ff df 	brhi	800025a6 <main+0x3a>
+800025ec:	12 3a       	cp.w	r10,r9
+800025ee:	cd c3       	brcs	800025a6 <main+0x3a>
+800025f0:	cf 0b       	rjmp	800025d0 <main+0x64>
+800025f2:	00 00       	add	r0,r0
+800025f4:	80 00       	ld.sh	r0,r0[0x0]
+800025f6:	25 68       	sub	r8,86
+800025f8:	80 00       	ld.sh	r0,r0[0x0]
+800025fa:	25 18       	sub	r8,81
+800025fc:	80 00       	ld.sh	r0,r0[0x0]
+800025fe:	20 08       	sub	r8,0
+80002600:	80 00       	ld.sh	r0,r0[0x0]
+80002602:	21 ac       	sub	r12,26
+80002604:	80 00       	ld.sh	r0,r0[0x0]
+80002606:	20 d8       	sub	r8,13
+80002608:	80 00       	ld.sh	r0,r0[0x0]
+8000260a:	20 ea       	sub	r10,14
+8000260c:	80 00       	ld.sh	r0,r0[0x0]
+8000260e:	2b 30       	sub	r0,-77
+80002610:	80 00       	ld.sh	r0,r0[0x0]
+80002612:	24 c4       	sub	r4,76
+80002614:	80 00       	ld.sh	r0,r0[0x0]
+80002616:	2b 48       	sub	r8,-76
+80002618:	80 00       	ld.sh	r0,r0[0x0]
+8000261a:	2b 44       	sub	r4,-76
+8000261c:	80 00       	ld.sh	r0,r0[0x0]
+8000261e:	21 00       	sub	r0,16
+80002620:	80 00       	ld.sh	r0,r0[0x0]
+80002622:	24 b0       	sub	r0,75
+
+Disassembly of section .exception:
+
+80002800 <_evba>:
+_evba:
+
+	.org  0x000
+	// Unrecoverable Exception.
+_handle_Unrecoverable_Exception:
+	rjmp $
+80002800:	c0 08       	rjmp	80002800 <_evba>
+	...
+
+80002804 <_handle_TLB_Multiple_Hit>:
+
+	.org  0x004
+	// TLB Multiple Hit.
+_handle_TLB_Multiple_Hit:
+	rjmp $
+80002804:	c0 08       	rjmp	80002804 <_handle_TLB_Multiple_Hit>
+	...
+
+80002808 <_handle_Bus_Error_Data_Fetch>:
+
+	.org  0x008
+	// Bus Error Data Fetch.
+_handle_Bus_Error_Data_Fetch:
+	rjmp $
+80002808:	c0 08       	rjmp	80002808 <_handle_Bus_Error_Data_Fetch>
+	...
+
+8000280c <_handle_Bus_Error_Instruction_Fetch>:
+
+	.org  0x00C
+	// Bus Error Instruction Fetch.
+_handle_Bus_Error_Instruction_Fetch:
+	rjmp $
+8000280c:	c0 08       	rjmp	8000280c <_handle_Bus_Error_Instruction_Fetch>
+	...
+
+80002810 <_handle_NMI>:
+
+	.org  0x010
+	// NMI.
+_handle_NMI:
+	rjmp $
+80002810:	c0 08       	rjmp	80002810 <_handle_NMI>
+	...
+
+80002814 <_handle_Instruction_Address>:
+
+	.org  0x014
+	// Instruction Address.
+_handle_Instruction_Address:
+	rjmp $
+80002814:	c0 08       	rjmp	80002814 <_handle_Instruction_Address>
+	...
+
+80002818 <_handle_ITLB_Protection>:
+
+	.org  0x018
+	// ITLB Protection.
+_handle_ITLB_Protection:
+	rjmp $
+80002818:	c0 08       	rjmp	80002818 <_handle_ITLB_Protection>
+	...
+
+8000281c <_handle_Breakpoint>:
+
+	.org  0x01C
+	// Breakpoint.
+_handle_Breakpoint:
+	rjmp $
+8000281c:	c0 08       	rjmp	8000281c <_handle_Breakpoint>
+	...
+
+80002820 <_handle_Illegal_Opcode>:
+
+	.org  0x020
+	// Illegal Opcode.
+_handle_Illegal_Opcode:
+	rjmp $
+80002820:	c0 08       	rjmp	80002820 <_handle_Illegal_Opcode>
+	...
+
+80002824 <_handle_Unimplemented_Instruction>:
+
+	.org  0x024
+	// Unimplemented Instruction.
+_handle_Unimplemented_Instruction:
+	rjmp $
+80002824:	c0 08       	rjmp	80002824 <_handle_Unimplemented_Instruction>
+	...
+
+80002828 <_handle_Privilege_Violation>:
+
+	.org  0x028
+	// Privilege Violation.
+_handle_Privilege_Violation:
+	rjmp $
+80002828:	c0 08       	rjmp	80002828 <_handle_Privilege_Violation>
+	...
+
+8000282c <_handle_Floating_Point>:
+
+	.org  0x02C
+	// Floating-Point: UNUSED IN AVR32UC and AVR32AP.
+_handle_Floating_Point:
+	rjmp $
+8000282c:	c0 08       	rjmp	8000282c <_handle_Floating_Point>
+	...
+
+80002830 <_handle_Coprocessor_Absent>:
+
+	.org  0x030
+	// Coprocessor Absent: UNUSED IN AVR32UC.
+_handle_Coprocessor_Absent:
+	rjmp $
+80002830:	c0 08       	rjmp	80002830 <_handle_Coprocessor_Absent>
+	...
+
+80002834 <_handle_Data_Address_Read>:
+
+	.org  0x034
+	// Data Address (Read).
+_handle_Data_Address_Read:
+	rjmp $
+80002834:	c0 08       	rjmp	80002834 <_handle_Data_Address_Read>
+	...
+
+80002838 <_handle_Data_Address_Write>:
+
+	.org  0x038
+	// Data Address (Write).
+_handle_Data_Address_Write:
+	rjmp $
+80002838:	c0 08       	rjmp	80002838 <_handle_Data_Address_Write>
+	...
+
+8000283c <_handle_DTLB_Protection_Read>:
+
+	.org  0x03C
+	// DTLB Protection (Read).
+_handle_DTLB_Protection_Read:
+	rjmp $
+8000283c:	c0 08       	rjmp	8000283c <_handle_DTLB_Protection_Read>
+	...
+
+80002840 <_handle_DTLB_Protection_Write>:
+
+	.org  0x040
+	// DTLB Protection (Write).
+_handle_DTLB_Protection_Write:
+	rjmp $
+80002840:	c0 08       	rjmp	80002840 <_handle_DTLB_Protection_Write>
+	...
+
+80002844 <_handle_DTLB_Modified>:
+
+	.org  0x044
+	// DTLB Modified: UNUSED IN AVR32UC.
+_handle_DTLB_Modified:
+	rjmp $
+80002844:	c0 08       	rjmp	80002844 <_handle_DTLB_Modified>
+	...
+
+80002850 <_handle_ITLB_Miss>:
+
+	.org  0x050
+	// ITLB Miss.
+_handle_ITLB_Miss:
+	rjmp $
+80002850:	c0 08       	rjmp	80002850 <_handle_ITLB_Miss>
+	...
+
+80002860 <_handle_DTLB_Miss_Read>:
+
+	.org  0x060
+	// DTLB Miss (Read).
+_handle_DTLB_Miss_Read:
+	rjmp $
+80002860:	c0 08       	rjmp	80002860 <_handle_DTLB_Miss_Read>
+	...
+
+80002870 <_handle_DTLB_Miss_Write>:
+
+	.org  0x070
+	// DTLB Miss (Write).
+_handle_DTLB_Miss_Write:
+	rjmp $
+80002870:	c0 08       	rjmp	80002870 <_handle_DTLB_Miss_Write>
+	...
+
+80002900 <_handle_Supervisor_Call>:
+
+	.org  0x100
+	// Supervisor Call.
+_handle_Supervisor_Call:
+	rjmp $
+80002900:	c0 08       	rjmp	80002900 <_handle_Supervisor_Call>
+80002902:	d7 03       	nop
+
+80002904 <_int0>:
+	 * RSR_INTx by the CPU upon interrupt entry. No other register is saved
+	 * by hardware.
+	 */
+	pushm   r8-r12, lr
+#endif
+	// Pass the int_level parameter to the _get_interrupt_handler function.
+80002904:	30 0c       	mov	r12,0
+80002906:	fe b0 fc bb 	rcall	8000227c <_get_interrupt_handler>
+8000290a:	58 0c       	cp.w	r12,0
+8000290c:	f8 0f 17 10 	movne	pc,r12
+	popm    r8-r12, lr
+#endif
+	/*
+	 * If this was a spurious interrupt (R12 == NULL), return from event
+	 * handler.
+	 */
+80002910:	d6 03       	rete
+
+80002912 <_int1>:
+	 * RSR_INTx by the CPU upon interrupt entry. No other register is saved
+	 * by hardware.
+	 */
+	pushm   r8-r12, lr
+#endif
+	// Pass the int_level parameter to the _get_interrupt_handler function.
+80002912:	30 1c       	mov	r12,1
+80002914:	fe b0 fc b4 	rcall	8000227c <_get_interrupt_handler>
+80002918:	58 0c       	cp.w	r12,0
+8000291a:	f8 0f 17 10 	movne	pc,r12
+	popm    r8-r12, lr
+#endif
+	/*
+	 * If this was a spurious interrupt (R12 == NULL), return from event
+	 * handler.
+	 */
+8000291e:	d6 03       	rete
+
+80002920 <_int2>:
+	 * RSR_INTx by the CPU upon interrupt entry. No other register is saved
+	 * by hardware.
+	 */
+	pushm   r8-r12, lr
+#endif
+	// Pass the int_level parameter to the _get_interrupt_handler function.
+80002920:	30 2c       	mov	r12,2
+80002922:	fe b0 fc ad 	rcall	8000227c <_get_interrupt_handler>
+80002926:	58 0c       	cp.w	r12,0
+80002928:	f8 0f 17 10 	movne	pc,r12
+	popm    r8-r12, lr
+#endif
+	/*
+	 * If this was a spurious interrupt (R12 == NULL), return from event
+	 * handler.
+	 */
+8000292c:	d6 03       	rete
+
+8000292e <_int3>:
+	 * RSR_INTx by the CPU upon interrupt entry. No other register is saved
+	 * by hardware.
+	 */
+	pushm   r8-r12, lr
+#endif
+	// Pass the int_level parameter to the _get_interrupt_handler function.
+8000292e:	30 3c       	mov	r12,3
+80002930:	fe b0 fc a6 	rcall	8000227c <_get_interrupt_handler>
+80002934:	58 0c       	cp.w	r12,0
+80002936:	f8 0f 17 10 	movne	pc,r12
+	popm    r8-r12, lr
+#endif
+	/*
+	 * If this was a spurious interrupt (R12 == NULL), return from event
+	 * handler.
+	 */
+8000293a:	d6 03       	rete
+8000293c:	d7 03       	nop
+8000293e:	d7 03       	nop
+80002940:	d7 03       	nop
+80002942:	d7 03       	nop
+80002944:	d7 03       	nop
+80002946:	d7 03       	nop
+80002948:	d7 03       	nop
+8000294a:	d7 03       	nop
+8000294c:	d7 03       	nop
+8000294e:	d7 03       	nop
+80002950:	d7 03       	nop
+80002952:	d7 03       	nop
+80002954:	d7 03       	nop
+80002956:	d7 03       	nop
+80002958:	d7 03       	nop
+8000295a:	d7 03       	nop
+8000295c:	d7 03       	nop
+8000295e:	d7 03       	nop
+80002960:	d7 03       	nop
+80002962:	d7 03       	nop
+80002964:	d7 03       	nop
+80002966:	d7 03       	nop
+80002968:	d7 03       	nop
+8000296a:	d7 03       	nop
+8000296c:	d7 03       	nop
+8000296e:	d7 03       	nop
+80002970:	d7 03       	nop
+80002972:	d7 03       	nop
+80002974:	d7 03       	nop
+80002976:	d7 03       	nop
+80002978:	d7 03       	nop
+8000297a:	d7 03       	nop
+8000297c:	d7 03       	nop
+8000297e:	d7 03       	nop
+80002980:	d7 03       	nop
+80002982:	d7 03       	nop
+80002984:	d7 03       	nop
+80002986:	d7 03       	nop
+80002988:	d7 03       	nop
+8000298a:	d7 03       	nop
+8000298c:	d7 03       	nop
+8000298e:	d7 03       	nop
+80002990:	d7 03       	nop
+80002992:	d7 03       	nop
+80002994:	d7 03       	nop
+80002996:	d7 03       	nop
+80002998:	d7 03       	nop
+8000299a:	d7 03       	nop
+8000299c:	d7 03       	nop
+8000299e:	d7 03       	nop
+800029a0:	d7 03       	nop
+800029a2:	d7 03       	nop
+800029a4:	d7 03       	nop
+800029a6:	d7 03       	nop
+800029a8:	d7 03       	nop
+800029aa:	d7 03       	nop
+800029ac:	d7 03       	nop
+800029ae:	d7 03       	nop
+800029b0:	d7 03       	nop
+800029b2:	d7 03       	nop
+800029b4:	d7 03       	nop
+800029b6:	d7 03       	nop
+800029b8:	d7 03       	nop
+800029ba:	d7 03       	nop
+800029bc:	d7 03       	nop
+800029be:	d7 03       	nop
+800029c0:	d7 03       	nop
+800029c2:	d7 03       	nop
+800029c4:	d7 03       	nop
+800029c6:	d7 03       	nop
+800029c8:	d7 03       	nop
+800029ca:	d7 03       	nop
+800029cc:	d7 03       	nop
+800029ce:	d7 03       	nop
+800029d0:	d7 03       	nop
+800029d2:	d7 03       	nop
+800029d4:	d7 03       	nop
+800029d6:	d7 03       	nop
+800029d8:	d7 03       	nop
+800029da:	d7 03       	nop
+800029dc:	d7 03       	nop
+800029de:	d7 03       	nop
+800029e0:	d7 03       	nop
+800029e2:	d7 03       	nop
+800029e4:	d7 03       	nop
+800029e6:	d7 03       	nop
+800029e8:	d7 03       	nop
+800029ea:	d7 03       	nop
+800029ec:	d7 03       	nop
+800029ee:	d7 03       	nop
+800029f0:	d7 03       	nop
+800029f2:	d7 03       	nop
+800029f4:	d7 03       	nop
+800029f6:	d7 03       	nop
+800029f8:	d7 03       	nop
+800029fa:	d7 03       	nop
+800029fc:	d7 03       	nop
+800029fe:	d7 03       	nop
